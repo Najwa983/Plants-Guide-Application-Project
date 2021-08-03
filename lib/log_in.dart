@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 void main() {
   runApp(MaterialApp(
     home: LogIn(),
@@ -87,3 +86,4 @@ class _LogInState extends State<LogIn> {
     );
   }
 }
+
