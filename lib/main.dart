@@ -38,10 +38,8 @@ void main() {
 class Home extends StatelessWidget{
   // This widget is the root of your application.
   @override
-  // _HomeState createState() => _HomeState();
 
 
-// classHome extends State<Home> {
 //   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -57,22 +55,7 @@ class Home extends StatelessWidget{
         backgroundColor: Colors.lightGreen[100],
         
        
-        // appBar:AppBar(
-        //   title:
-        //   Text('دليلك النباتي',
-        //   style:TextStyle( 
-        //   fontSize:30,
-        //   fontFamily:  'Rubik',
-        //   ),
-          
-          
-        //   ),
-          
-          
-          
-        //   centerTitle: true,
-        //   backgroundColor: Colors.green[800],
-        //   ) ,
+       
           
           body:SafeArea(
             child:Container(
@@ -94,23 +77,7 @@ class Home extends StatelessWidget{
 //   moreStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
 // ),
               
-          //   Container(
-          //     child: Text('Votre guide des plantes', 
-          //         textAlign:TextAlign.center,
-          //         style: TextStyle(
-          //           color:Colors.green[300],
-          //           fontSize: 20,
-          //           //fontWeight: FontWeight.bold,
-          //           //fontStyle: FontStyle.italic,
-          //           fontFamily: 'OtomanopeeOne',
-    
-            
-          //   //fontFamily:'NotoSansJP-Medium',
-          //    ),
-          //    ),
-             
-          //     padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
-          // ),
+         
     
           
             Column(
@@ -125,9 +92,10 @@ class Home extends StatelessWidget{
                     fontFamily: 'Amiri',
     
             
-            //fontFamily:'NotoSansJP-Medium',
+            
              ),
              ),
+<<<<<<< HEAD
             // //  Image.asset('assets/logo.jpg',fit: BoxFit.cover),
             // //   // padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
           
@@ -241,14 +209,34 @@ class Home extends StatelessWidget{
           //   ),
             
             
+=======
+           
+              ],
+          ),
+          
+        Column(
+          mainAxisAlignment: MainAxisAlignment.values.first,
+          crossAxisAlignment: CrossAxisAlignment.stretch ,
+           children:[
+    //     
+          Consumer<ApplicationState>(
+              builder: (context, appState, _) => Authentication(
+                email: appState.email,
+                loginState: appState.loginState,
+                startLoginFlow: appState.startLoginFlow,
+                verifyEmail: appState.verifyEmail,
+                signInWithEmailAndPassword: appState.signInWithEmailAndPassword,
+                cancelRegistration: appState.cancelRegistration,
+                registerAccount: appState.registerAccount,
+                signOut: appState.signOut,
+              ),
+            ),
+         
+        ]
+        ),
+>>>>>>> 7577cb0781f894f63c29d85e4728e1b98c2a0c2e
                 
-                 
-                  
-                 
-    
-              
-    
-          ],
+   ],
           ) ,
           )
           )
