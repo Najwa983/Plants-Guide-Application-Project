@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:internship_app/home_page.dart';
-import 'package:internship_app/log_in.dart';
+// import 'package:internship_app/log_in.dart';
 import 'package:internship_app/main.dart';
+// import 'package:internship_app/plantList.dart';
+import 'package:internship_app/searchWidget.dart';
 
 import 'widgets.dart';
 import 'home_page.dart';
+import 'main.dart';
 
 enum ApplicationLoginState {
   loggedOut,
@@ -136,31 +139,56 @@ class _AuthenticationState extends State<Authentication> {
           },
         );
       case ApplicationLoginState.loggedIn:
-        return Row(
-          children: [
+        return Scaffold(
+         body:
+            // Container(
+            //   child: SearchWidget(),
+            // ),
             
-            Padding(
-              padding: const EdgeInsets.fromLTRB(130, 10, 10, 0),
-              child: ElevatedButton(
-                onPressed: () {
-                  widget.signOut();
-                },
-                style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(Colors.green[400]),
-              fixedSize: MaterialStateProperty.all(Size(160,40),),
-              textStyle: MaterialStateProperty.all(TextStyle(color: Colors.greenAccent,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              fontStyle: FontStyle.italic
-    
-              ),),
+               Container(
+                         
+                       child: UserInformation()
                ),
-               child: const Text('تسجيل الخروج'),
+        //     ? HeadingItem('Heading $i')
+        //     : MessageItem('Sender $i', 'Message body $i'),
+      
+
+                       
+
+                  
+              // Divider(
+              //   height: 50,
+              //   thickness: 5,
+              //   color: Colors.green[700],
+              //   // endIndent: 200,
+              //   // indent: 70,
+
+              // ),
+            
+            // Padding(
+            //   padding: const EdgeInsets.fromLTRB(130, 10, 10, 0),
+            //   child: ElevatedButton(
+            //     onPressed: () {
+            //       widget.signOut();
+            //     },
+            //     style: ButtonStyle(
+            //   backgroundColor: MaterialStateProperty.all(Colors.green[400]),
+            //   fixedSize: MaterialStateProperty.all(Size(160,40),),
+            //   textStyle: MaterialStateProperty.all(TextStyle(color: Colors.greenAccent,
+            //   fontSize: 20,
+            //   fontWeight: FontWeight.bold,
+            //   fontStyle: FontStyle.italic
+    
+            //   ),),
+            //    ),
+            //    child: const Text('تسجيل الخروج'),
 
                
-              ),
-            ),
-          ],
+            //   ),
+            // ),
+            
+            
+          
         );
       default:
         return Row(
@@ -475,6 +503,7 @@ class _PasswordFormState extends State<PasswordForm> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       const SizedBox(width: 16),
+                      
                       StyledButton(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
