@@ -15,6 +15,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart'; //
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:internship_app/log_in.dart';
+import 'package:internship_app/plantList.dart';
+import 'package:internship_app/searchWidget.dart';
+import 'package:internship_app/user.dart';
 // import 'package:google_fonts/google_fonts.dart';
 // import 'package:internship_app/log_in.dart';
 // import 'package:internship_app/plantList.dart';
@@ -38,8 +41,10 @@ void main() {
 class Home extends StatelessWidget{
   // This widget is the root of your application.
   @override
+  // _HomeState createState() => _HomeState();
 
 
+// classHome extends State<Home> {
 //   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -55,7 +60,22 @@ class Home extends StatelessWidget{
         backgroundColor: Colors.lightGreen[100],
         
        
-       
+        // appBar:AppBar(
+        //   title:
+        //   Text('دليلك النباتي',
+        //   style:TextStyle( 
+        //   fontSize:30,
+        //   fontFamily:  'Rubik',
+        //   ),
+          
+          
+        //   ),
+          
+          
+          
+        //   centerTitle: true,
+        //   backgroundColor: Colors.green[800],
+        //   ) ,
           
           body:SafeArea(
             child:Container(
@@ -77,7 +97,23 @@ class Home extends StatelessWidget{
 //   moreStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
 // ),
               
-         
+          //   Container(
+          //     child: Text('Votre guide des plantes', 
+          //         textAlign:TextAlign.center,
+          //         style: TextStyle(
+          //           color:Colors.green[300],
+          //           fontSize: 20,
+          //           //fontWeight: FontWeight.bold,
+          //           //fontStyle: FontStyle.italic,
+          //           fontFamily: 'OtomanopeeOne',
+    
+            
+          //   //fontFamily:'NotoSansJP-Medium',
+          //    ),
+          //    ),
+             
+          //     padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+          // ),
     
           
             Column(
@@ -92,10 +128,9 @@ class Home extends StatelessWidget{
                     fontFamily: 'Amiri',
     
             
-            
+            //fontFamily:'NotoSansJP-Medium',
              ),
              ),
-<<<<<<< HEAD
             // //  Image.asset('assets/logo.jpg',fit: BoxFit.cover),
             // //   // padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
           
@@ -134,6 +169,7 @@ class Home extends StatelessWidget{
             child:SizedBox(
               height: 200.0,
               child: Consumer<ApplicationState>(
+                
                   builder: (context, appState, _) => Authentication(
                     email: appState.email,
                     loginState: appState.loginState,
@@ -209,34 +245,14 @@ class Home extends StatelessWidget{
           //   ),
             
             
-=======
-           
-              ],
-          ),
-          
-        Column(
-          mainAxisAlignment: MainAxisAlignment.values.first,
-          crossAxisAlignment: CrossAxisAlignment.stretch ,
-           children:[
-    //     
-          Consumer<ApplicationState>(
-              builder: (context, appState, _) => Authentication(
-                email: appState.email,
-                loginState: appState.loginState,
-                startLoginFlow: appState.startLoginFlow,
-                verifyEmail: appState.verifyEmail,
-                signInWithEmailAndPassword: appState.signInWithEmailAndPassword,
-                cancelRegistration: appState.cancelRegistration,
-                registerAccount: appState.registerAccount,
-                signOut: appState.signOut,
-              ),
-            ),
-         
-        ]
-        ),
->>>>>>> 7577cb0781f894f63c29d85e4728e1b98c2a0c2e
                 
-   ],
+                 
+                  
+                 
+    
+              
+    
+          ],
           ) ,
           )
           )
@@ -324,6 +340,8 @@ class ApplicationState extends ChangeNotifier {
           .createUserWithEmailAndPassword(email: email, password: password);
       // ignore: deprecated_member_use
       await credential.user!.updateProfile(displayName: displayName);
+      userSetup(displayName, email);
+
     } on FirebaseAuthException catch (e) {
       errorCallback(e);
     }
@@ -334,282 +352,301 @@ class ApplicationState extends ChangeNotifier {
   }
 }
 
-// class FireStoreService extends ChangeNotifier {
-//     FireStoreService();
-//     static Future<dynamic> loadImage(BuildContext context,String Image) async{
-//       return await FirebaseStorage.instance.ref().child(Image).getDownloadURL();
-//     }
-// }
 
-class UserInformation extends StatefulWidget {
+
+
+  // Widget signOut() {
+  //   return Row(
+  //         children: [
+  //           Column(
+  //             mainAxisAlignment: MainAxisAlignment.center,
+  //             crossAxisAlignment: CrossAxisAlignment.start,
+  //             children: [ 
+  //               Container(
+  //           decoration: new BoxDecoration(
+  //             shape: BoxShape.circle
+  //           ),
+  //           child: Image(
+  //             image: AssetImage('assets/plant.jpg'),
+  //             width: 300,
+  //             height: 300,
+  //             fit: BoxFit.fitWidth,
+              
+              
+    
+  //             ),
+  //             padding: EdgeInsets.fromLTRB(50, 0, 0, 0),
+            
+  //         ),
+  //               Padding(
+  //               padding: const EdgeInsets.fromLTRB(130, 0, 0, 0),
+  //               child: ElevatedButton(
+  //                 onPressed: () {
+  //                   signOut();
+  //                 },
+  //                 style: ButtonStyle(
+  //               backgroundColor: MaterialStateProperty.all(Colors.green[400]),
+  //               fixedSize: MaterialStateProperty.all(Size(150,40),),
+  //               textStyle: MaterialStateProperty.all(TextStyle(color: Colors.green[400],
+  //               fontSize: 20,
+  //               fontWeight: FontWeight.bold,
+  //               fontStyle: FontStyle.italic
+                
+  //               )),
+                
+  //               ),
+                
+  //                 child: const Text('سجل الان'),
+  //               ),
+  //             ),
+              
+  //             ],
+  //           ),
+  //         ]
+  //       );
+  // }
+  class PlantInformation extends StatefulWidget {
   @override
-    _UserInformationState createState() => _UserInformationState();
+    _PlantInformationState createState() => _PlantInformationState();
+
 }
 
-class _UserInformationState extends State<UserInformation> {
-  final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance.collection('Plant').snapshots();
+
+class _PlantInformationState extends State<PlantInformation> {
+  final Stream<QuerySnapshot> _plantsStream = FirebaseFirestore.instance.collection('Plant').snapshots();
+  final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance.collection('Users').snapshots();
+
 
   get index => null;
   
 
 
   
-  // var url =  ref.getDownloadURL() as String;
-
-  // static get ref => null;
-  // final ref = FirebaseStorage.instance.ref().child('1');
-// no need of the file extension, the name will do fine.
-// ignore: unnecessary_cast
-// var url = await ref.getDownloadURL() as String;
-// print(url);
 
 
   
 
 
   Widget build(BuildContext context) {
+    // Container( child:SearchWidget());
     return StreamBuilder<QuerySnapshot>(
-      stream: _usersStream,
+      stream: _plantsStream,
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasError) {
           return Text('Something went wrong');
         }
 
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Text("Loading");
+          return Center(child: Text("Loading"));
         }
 
-        return ListView(
-          children: snapshot.data!.docs.map((DocumentSnapshot document) {
-          Map<String, dynamic> data = document.data() as Map<String, dynamic>;
-            return Container(
-               padding: EdgeInsets.all(0),
-              decoration: BoxDecoration(
-                border: index == 0
-                    ? Border() // This will create no border for the first item
-                    : Border(
-                        top: BorderSide(
-                            width: 2,
-                            color: Theme.of(context)
-                                .primaryColor)), // This will create top borders for the rest
-              ),
-              child: ListTile(
-                // autofocus: true,
-                tileColor: Colors.green[200],
-                // selected: true,
-                // isThreeLine: true,
-                title: 
-                  
-                    Column(
-                      children: [
-                        Text('${data['الإسم بالعربية']}'),
-                        Image.network('${data['imageURL']}', 
-                        width: 100,
-                        height: 100,
-                        ),
-                         
-                        // Image.network( downloadURL),
-                        // Image.network(_downloadUrl)
-                        
-                      
-                      ],
-                    ),
+        return Scaffold(
 
-                    onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) =>
-                      MaterialApp(
-      theme: ThemeData(
-        buttonTheme: Theme.of(context).buttonTheme.copyWith(
-              highlightColor: Colors.green[400],
-            ),
-        primarySwatch: Colors.green,
-        fontFamily: 'Amiri' ,
-        
-        ),
-     home: Scaffold(
-        backgroundColor: Colors.lightGreen[300],
-        body:
-                     
-                            
-                           Column(
-                             mainAxisAlignment: MainAxisAlignment.center,
-                             crossAxisAlignment: CrossAxisAlignment.center,
-                             textDirection: TextDirection.rtl,
-                             children: [
-                              Text('${data['الإسم بالعربية']}',style:
-                               TextStyle(
-                                 color: Colors.black,
-                                 fontSize: 20,
-
-                                 ),
-                               ),
-                              Text('${data['الإسم بالأمازيغية']}',style:
-                               TextStyle(
-                                 color: Colors.black,
-                                 fontSize: 10,
-
-                                 ),),
-                              Text('${data['الاسم العلمي']}',style:
-                               TextStyle(
-                                 color: Colors.black,
-                                 fontSize: 20,
-
-                                 ),),
-                              Text('${data['العائلة التي تنتمي إليها']}',style:
-                               TextStyle(
-                                 color: Colors.black,
-                                 fontSize: 10,
-
-                                 ),),
-                              Text('${data['نوع النبتة ']} ',style:
-                               TextStyle(
-                                 color: Colors.black,
-                                 fontSize: 10,
-
-                                 ),),
-                              Text('${data['مزايا']} ',style:
-                               TextStyle(
-                                 color: Colors.black,
-                                 fontSize: 10,
-
-                                 ),),
-
-
-
-                             ],
-                           ),
-     ),
-                      ),
-
-                           
-                         
-                      
-                      
-                       
-                     
-
-    
-                      
-                     
-                      
-                      
-        // State > {
-        //                 @override
-        //                 Widget build(BuildContext context) {
-        //                   return Container(
-                            
-        //                   );
-        //                 }
-        //               } {
-                        
-        //               }
-                      
-                      ));
-                    },
-                    // Image(image:data['image'])
-                  
+          body: ListView(
+            children: snapshot.data!.docs.map((DocumentSnapshot document) {
+            Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+              return Container(
+                 padding: EdgeInsets.all(0),
+                decoration: BoxDecoration(
+                  border: index == 0
+                      ? Border() // This will create no border for the first item
+                      : Border(
+                          top: BorderSide(
+                              width: 0,
+                              color: Theme.of(context)
+                                  .bottomAppBarColor)), // This will create top borders for the rest
+                ),
+                child: ListTile(
                 
-                // subtitle: Text(data['company']),
+                 
+                  // autofocus: true,
+                  tileColor: Colors.green[200],
+                  // selected: true,
+                  // isThreeLine: true,
+                  title: 
+                    
+                      Column(
+                        children: [
+                          Text('${data['الإسم بالعربية']}',textAlign: TextAlign.center),
+                          Image.network('${data['imageURL']}', 
+                          width: 100,
+                          height: 100,
+                          ),
+                           
+                          
+                        
+                        ],
+                      ),
+        
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                        MaterialApp(
+              theme: ThemeData(
+          buttonTheme: Theme.of(context).buttonTheme.copyWith(
+                highlightColor: Colors.green[400],
               ),
-              
-            );
-          }).toList(),
+          primarySwatch: Colors.green,
+          fontFamily: 'Amiri' ,
+          
+          ),
+             home: Scaffold(
+               appBar: AppBar(
+          //  backgroundColor: Colors.black26,
+           
+          title:Text('${data['الإسم بالعربية']}', textAlign: TextAlign.center,),
+          ),
+          
+          backgroundColor: Colors.green[200],
+          body:
+                       
+                              
+                      ListView(
+                        children:[ Column(
+                                 mainAxisAlignment: MainAxisAlignment.center,
+                                 crossAxisAlignment: CrossAxisAlignment.center,
+                                 textDirection: TextDirection.rtl,
+                                 children: [
+                                  Text('الإسم بالعربية:${data['الإسم بالعربية']}',style:
+                                   TextStyle(
+                                     color: Colors.black,
+                                     fontSize: 20,
+                      
+                                     ),textAlign: TextAlign.center 
+                                   ),
+                                   Image.network('${data['imageURL']}',
+                                   width: 300,
+                                   height: 300,
+                                   ),
+                                  Text('الإسم بالأمازيغية:${data['الإسم بالأمازيغية']}',style:
+                                   TextStyle(
+                                     color: Colors.black,
+                                     fontSize: 10,
+                      
+                                     ),
+                                     textAlign: TextAlign.center),
+                                  Text('${data['الاسم العلمي']} الاسم العلمي',style:
+                                   TextStyle(
+                                     color: Colors.black,
+                                     fontSize: 20,
+                      
+                                     ),
+                                     textAlign: TextAlign.center),
+                                  Text('${data['العائلة التي تنتمي إليها']} العائلة التي تنتمي إليها',style:
+                                   TextStyle(
+                                     color: Colors.black,
+                                     fontSize: 10,
+                      
+                                     ),
+                                     textAlign: TextAlign.center),
+                                  Text('${data['نوع النبتة ']} نوع النبتة',style:
+                                   TextStyle(
+                                     color: Colors.black,
+                                     fontSize: 10,
+                      
+                                     ),
+                                      textAlign: TextAlign.center),
+                                      
+                                  Column(
+                                    children: [
+                                      Text( 'المزايا والإستعمالات '),
+                                      Text('${data['مزايا']} ',style:
+                                       TextStyle(
+                                         color: Colors.black,
+                                         fontSize: 10,
+                      
+                                         ),
+                                         textAlign: TextAlign.end),
+                                    ],
+                                  ),
+                                  //                      Padding(
+                                  //   padding: const EdgeInsets.fromLTRB(130, 10, 10, 0),
+                                  //   child: ElevatedButton(
+                                  //         onPressed: () {
+                                  //           widget.signOut();
+                                  //         },
+                                  //         style: ButtonStyle(
+                                  //   backgroundColor: MaterialStateProperty.all(Colors.green[400]),
+                                  //   fixedSize: MaterialStateProperty.all(Size(160,40),),
+                                  //   textStyle: MaterialStateProperty.all(TextStyle(color: Colors.greenAccent,
+                                  //   fontSize: 20,
+                                  //   fontWeight: FontWeight.bold,
+                                  //   fontStyle: FontStyle.italic
+                          
+                                  //   ),),
+                                  //        ),
+                                  //        child: const Text('تسجيل الخروج'),
+                      
+                                         
+                                  //   ),
+                                  // ),
+                      
+                      
+                      
+                                 ],
+                               ),
+                        ]
+                      ),
+                             
+                             
+             ),
+                        ),
+        
+                             
+                           
+                        
+                        
+                         
+                       
+        
+            
+                        
+                       
+                        
+                        
+          
+           
+                        
+                        ));
+                      },
+                     
+                    
+                  
+                ),
+                
+              );
+            }).toList(),
+          ),
         )
         ;
       },
     );
+    // Padding(
+    //           padding: const EdgeInsets.fromLTRB(130, 10, 10, 0),
+    //           child: ElevatedButton(
+    //                 onPressed: () {
+                      
+    //                 },
+    //                 style: ButtonStyle(
+    //           backgroundColor: MaterialStateProperty.all(Colors.green[400]),
+    //           fixedSize: MaterialStateProperty.all(Size(160,40),),
+    //           textStyle: MaterialStateProperty.all(TextStyle(color: Colors.greenAccent,
+    //           fontSize: 20,
+    //           fontWeight: FontWeight.bold,
+    //           fontStyle: FontStyle.italic
+    
+    //           ),),
+    //                ),
+    //                child: const Text('تسجيل الخروج'),
+
+                   
+    //           ),
+    //         );
+                       
+                     
   }
 }
 
  
-//  // ignore: camel_case_types
-//  class readData  extends StatelessWidget {
-//   get index => null;
 
  
  
-//    @override
-//    Widget build(BuildContext context) {
-//      return Scaffold(
-//         body:StreamBuilder<QuerySnapshot>(
-//           stream: FirebaseFirestore.instance.collection("Plant").snapshots(),
-//           builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
-//             if(!snapshot.hasData){
-//               return Text('No data found ..');
-//             }else{
-//               return 
-//           //       Expanded(
-//           //         child: SizedBox(
-//           //           height:100.0,
-//           //           child: ListView.builder(
-//           //           scrollDirection: Axis.vertical,
-//           //           physics: ScrollPhysics(),
-//           //           padding: EdgeInsets.only(top: 24),
-//           //           itemCount: snapshot.data!.docs.length,
-//           //           shrinkWrap: true,
-//           //           itemBuilder: (context, index) {
-//           //             var temp = snapshot.data!.docs[index];
-//           //             return Text('${temp['الإسم بالعربية']}');
-//           //           },
-//           //                         ),
-//           //         ),
-//           //       )
-              
-//           //     ;
-//           //   }
-
-//           // }
-
-//           // ),
-          
-       
-     
-//    }
-//  }  
-//   // FirebaseFirestore.instance.collection("Plant").get().then((querySnapshot) {
-  //   querySnapshot.docs.forEach((result) {
-  //     print(result.data());
-  //   });
-  // });body: new StreamBuilder(
-    // ignore: unused_label
-   
-    
- 
-
- 
-
-// ignore: camel_case_types
-// class readData extends StatelessWidget {
-  
-//   final String documentId;
-//   readData(this.documentId);
-
-
-  
-
-   
-      
-      // future: plants.doc(documentId).get(),
-      
-
-        
-            // var id = int.parse(documentId);
-           
-          // Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
-          // for(id=1;id<6;id++){
-          
-           
-      //   
-      //   ?HeadingItem('${data['الإسم بالعربية']}'):
-      //   BodyItem( '${data['الإسم بالأمازيغية']} ${data['الاسم العلمي']}  ${data['العائلة التي تنتمي إليها']} ${data['نوع النبتة ']} ')
-      //       // ? HeadingItem('Heading $i')
-            // : MessageItem('Sender $i', 'Message body $i'),
-      
-         
-        
-
-
-        
-          
-      
-    

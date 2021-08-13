@@ -1,3 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart'; 
+
 import 'package:flutter/material.dart';
 import 'package:internship_app/home_page.dart';
 // import 'package:internship_app/log_in.dart';
@@ -48,14 +51,31 @@ class Authentication extends StatefulWidget {
     String password,
     void Function(Exception e) error,
   ) registerAccount;
+   
   final void Function() signOut;
+ 
 
   @override
   _AuthenticationState createState() => _AuthenticationState();
 }
 
 class _AuthenticationState extends State<Authentication> {
+  // widgetsFlutterBinding.ensureInitialized();
+  // final FirebaseAuth _auth = FirebaseAuth.instance;
+  // late User user;
+
+  // get Firebase => null;
+  
   @override
+   void initState() {
+    super.initState();
+    // initUser();
+  }
+
+  // initUser() async {
+  //   user = _auth.currentUser!;
+  //   setState(() {});
+  // }
   Widget build(BuildContext context) {
     switch (widget.loginState) {
       case ApplicationLoginState.loggedOut:
@@ -99,7 +119,14 @@ class _AuthenticationState extends State<Authentication> {
                 
                 ),
                 
-                  child: const Text('سجل الان'),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      const Text('سجل الان  '),
+                      Icon(Icons.login)
+                    ],
+                  ),
                 ),
               ),
               
@@ -129,7 +156,9 @@ class _AuthenticationState extends State<Authentication> {
             email,
             displayName,
             password,
-          ) {
+          )
+          
+           {
             widget.registerAccount(
                 email,
                 displayName,
@@ -138,58 +167,113 @@ class _AuthenticationState extends State<Authentication> {
                     _showErrorDialog(context, 'Failed to create account', e));
           },
         );
+
+
       case ApplicationLoginState.loggedIn:
-        return Scaffold(
-         body:
-            // Container(
-            //   child: SearchWidget(),
-            // ),
-            
-               Container(
-                         
-                       child: UserInformation()
-               ),
-        //     ? HeadingItem('Heading $i')
-        //     : MessageItem('Sender $i', 'Message body $i'),
+            //  final User user = _auth.currentUser!;
       
 
-                       
+        return
+        //  FutureBuilder(
+        // // future: Firebase.initializeApp(),
+        // builder:(context, snapshot) {
+        //   if (snapshot.hasError) {
+        //   return Text('eror');
+        // }
+        //  if (snapshot.connectionState == ConnectionState.done) {
+           Scaffold(
+             appBar: AppBar(title:SearchWidget()),
 
-                  
-              // Divider(
-              //   height: 50,
-              //   thickness: 5,
-              //   color: Colors.green[700],
-              //   // endIndent: 200,
-              //   // indent: 70,
-
-              // ),
+// reset of code
+drawer: Drawer(
+  elevation: 10.0,
+  child: ListView(
+    children: <Widget>[
+      // UserAccountsDrawerHeader(
+      //   // accountName: Text("${user.displayName}"),
+      //   // accountEmail: Text("${user.email}"),
+      //   decoration: BoxDecoration(
+      //     // image: DecorationImage(
+      //     //   fit: BoxFit.fill,
+      //     //   image: NetworkImage("${user.photoUrl}"),
+      //     // ),
+      //   ),
+      // ),
+    ],
+  ),
+),
+             
+     
+             
+           body:
+          // Padding(
+          //       padding: const EdgeInsets.fromLTRB(130, 0, 0, 0),
+          //       child: ElevatedButton(
+          //         onPressed: () {
+          //           widget();
+          //         },
+          //         style: ButtonStyle(
+          //       backgroundColor: MaterialStateProperty.all(Colors.green[400]),
+          //       fixedSize: MaterialStateProperty.all(Size(150,40),),
+          //       textStyle: MaterialStateProperty.all(TextStyle(color: Colors.green[400],
+          //       fontSize: 20,
+          //       fontWeight: FontWeight.bold,
+          //       fontStyle: FontStyle.italic
+                
+          //       )),
+                
+          //       ),
+                
+          //         child: const Text('سجل الان'),
+          //       ),
+          //     ),
+              
+              
+                
+                     
+                         
+                         
+                         Container(
+                           
+                         child: PlantInformation()
+                         ),
+            floatingActionButton: FloatingActionButton(
+              // shape: ShapeBorder.lerp(a, b, t),
+              onPressed: () {
+                widget.signOut();
+              },
+              child:Icon(Icons.logout),
+              ),
             
-            // Padding(
-            //   padding: const EdgeInsets.fromLTRB(130, 10, 10, 0),
-            //   child: ElevatedButton(
-            //     onPressed: () {
-            //       widget.signOut();
-            //     },
-            //     style: ButtonStyle(
-            //   backgroundColor: MaterialStateProperty.all(Colors.green[400]),
-            //   fixedSize: MaterialStateProperty.all(Size(160,40),),
-            //   textStyle: MaterialStateProperty.all(TextStyle(color: Colors.greenAccent,
-            //   fontSize: 20,
-            //   fontWeight: FontWeight.bold,
-            //   fontStyle: FontStyle.italic
-    
-            //   ),),
-            //    ),
-            //    child: const Text('تسجيل الخروج'),
-
-               
-            //   ),
-            // ),
+                         
+                     
+              
             
+                   
+                 
+          //     ? HeadingItem('Heading $i')
+          //     : MessageItem('Sender $i', 'Message body $i'),
+              
+        
+                         
+        
+                    
+                // Divider(
+                //   height: 50,
+                //   thickness: 5,
+                //   color: Colors.green[700],
+                //   // endIndent: 200,
+                //   // indent: 70,
+        
+                // ),
+              
+              
             
           
-        );
+           );
+         
+         
+
       default:
         return Row(
           children: const [
@@ -308,6 +392,7 @@ class RegisterForm extends StatefulWidget {
   final String email;
   final void Function(String email, String displayName, String password)
       registerAccount;
+      
   final void Function() cancel;
   @override
   _RegisterFormState createState() => _RegisterFormState();
@@ -323,6 +408,7 @@ class _RegisterFormState extends State<RegisterForm> {
   void initState() {
     super.initState();
     _emailController.text = widget.email;
+    
   }
 
   @override
@@ -528,3 +614,46 @@ class _PasswordFormState extends State<PasswordForm> {
     );
   }
 }
+// class UserInformation extends StatefulWidget {
+//   @override
+//     _UserInformationState createState() => _UserInformationState();
+
+// }
+
+
+// class _UserInformationState extends State<UserInformation> {
+//   final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance.collection('Users').snapshots();
+
+//   get index => null;
+  
+//   snapshot.data!.docs.map((DocumentSnapshot document) {
+//             Map<String, dynamic> userdata = document.data() as Map<String, dynamic>;})
+
+
+//   Widget build(BuildContext context) {
+//     // Container( child:SearchWidget());
+//     return StreamBuilder<QuerySnapshot>(
+//       stream: _usersStream,
+//       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+//         if (snapshot.hasError) {
+//           return Text('Something went wrong');
+//         }
+
+//         if (snapshot.connectionState == ConnectionState.waiting) {
+//           return Center(child: Text("Loading"));
+//         }
+
+//         return Scaffold(
+//         drawer: Drawer(
+//           child: 
+             
+//               // return Container();:
+         
+          
+//         )
+//         )
+//         );
+//       },
+//     );
+//   }
+// }
